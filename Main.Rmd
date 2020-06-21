@@ -7,6 +7,25 @@ output: pdf_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(foreign)
+library(tidyverse)
+library(foreign)
+library(psych)
+library(reshape2)
+library(ggplot2)
+library(car)
+library(stats)
+library(Hmisc)
+library(vcd)
+library(broom)
+library(Amelia)
+library(pscl)
+library(rcompanion)
+library(DMwR)
+library(haven)
+library(expss)
+library(here)
 ```
 
 ## R Markdown
@@ -14,6 +33,13 @@ knitr::opts_chunk$set(echo = TRUE)
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+Why incc und nicht inc (hhincc)
+
+Reduktion der Fallzahl auf ca. 2000
+alle Vars sind nicht notwendig, bis auf partyVote aber hier würde Nicht-Wähleranteil verloren gehen (leftRight ist auch gut)
+
 
 ```{r cars, warning=TRUE, paged.print=TRUE}
 summary(cars)

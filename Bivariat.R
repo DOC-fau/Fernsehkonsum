@@ -23,7 +23,6 @@ library(here)
 #####Multivariate Analyse:
 load("main_df.RData")
 main_df_desc2 <- main_df
-main_df_desc2 <- droplevels(main_df_desc2)
 
 
 ###Variablenliste
@@ -56,6 +55,7 @@ main_df_desc2 <- droplevels(main_df_desc2)
 # currOcc: RESPONDENT: CURRENT OCCUPATION
 # subvOther: RESP.: SUPERVISING THE WORK OF OTHERS?
 # unempl: RESP.: UNEMPLOYMENT IN THE LAST 10 YEARS
+# incc: RESP.: MONTHLY NET INC.-OPEN+CLOSED Q.,CAT
 # hhincc: HH.: MONTHLY NET INC.-OPEN+CLOSED, CAT.
 # freqPolFam: HOW OFTEN TALK ABOUT POLITICS: IN FAMILY
 # freqPolFre: HOW OFTEN TALK ABOUT POLITICS: FRIENDS

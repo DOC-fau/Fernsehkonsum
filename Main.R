@@ -33,14 +33,13 @@ library(Amelia)
 library(pscl)
 library(rcompanion)
 library(DMwR)
-library(haven)
 library(expss)
 library(here)
 
 
 #########Vorbereitung des Datensatzes
-main_df <- read_sav(file = "C:/Users/Celik/Documents/OneDrive/Documents/Einführung in R/Datensatz/allbus-daten_2018.sav")
-main_df <- as.tibble(main_df)
+main_df <- read.spss(file = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Datensatz/allbus-daten_2018.sav", to.data.frame=TRUE)
+main_df <- as_tibble(main_df)
 
 #####Variablenliste:
 # lm19 TV: WATCH NEWS ON PUBLIC CHANNELS?
@@ -63,7 +62,7 @@ main_df <- as.tibble(main_df)
 # pe13: PEOPLE SHLD STAY INFORMED ABOUT POLITICS
 # pa01: SELF-PLACEMENT ON LEFT-RIGHT CONTINUUM
 # id02: SELF-ASSESSMENT OF SOCIAL CLASS, RESP
-# sex: RESPONDENT: SEX
+# sex:  RESPONDENT: SEX
 # agec: RESPONDENT: AGE, CATEGORIZED
 # educ: RESP.: GENERAL SCHOOL LEAVING CERTIFICATE
 # de15: RESP.: UNIVERSITY DEGREE
@@ -72,6 +71,7 @@ main_df <- as.tibble(main_df)
 # dw01: RESPONDENT: CURRENT OCCUPATION
 # dw10: RESP.: SUPERVISING THE WORK OF OTHERS?
 # dw18: RESP.: UNEMPLOYMENT IN THE LAST 10 YEARS
+# incc: RESP.: MONTHLY NET INC.-OPEN+CLOSED Q.,CAT
 # hhincc: HH.: MONTHLY NET INC.-OPEN+CLOSED, CAT.
 # pp81: HOW OFTEN TALK ABOUT POLITICS: IN FAMILY
 # pp82: HOW OFTEN TALK ABOUT POLITICS: FRIENDS
@@ -83,7 +83,7 @@ main_df <- as.tibble(main_df)
 
 # wghtpew: WEIGHT: EAST-WEST, PERSON-LEVEL
 
-#eastwest [5], german [6], sex [159], agec [163], educ [181], work [198], hhincc [395], land [701], wghtpew [705]
+#eastwest [5], german [6], sex [159], agec [163], educ [181], work [198], incc [387], hhincc [395], land [701], wghtpew [705]
 
 
 #####Aufbereitung der Variablen:
@@ -118,45 +118,13 @@ names(main_df)[472] <- "vote"
 names(main_df)[473] <- "partyVote"
 names(main_df)[685] <- "intClassH"
 
-main_df <- main_df[, c(5:6, 8, 11, 13:19, 70:71, 78, 82, 84, 91, 105, 128, 159, 163, 181, 191, 194, 198, 199, 210, 213, 395, 426:427, 435, 472:473, 685, 701, 705)]
+levels(main_df$trustTv) <- c("KEIN VERTRAUEN", "2", "3", "4", "5", "6", "GROßES VERTRAUEN")
+levels(main_df$trustNewsp) <- c("KEIN VERTRAUEN", "2", "3", "4", "5", "6", "GROßES VERTRAUEN")
 
-main_df$ardZdf <- as_factor(main_df$ardZdf)
-main_df$eastwest <- as_factor(main_df$eastwest)
-main_df$german <- as_factor(main_df$german)
-main_df$finSit <- as_factor(main_df$finSit)
-main_df$tvWeek <- as_factor(main_df$tvWeek)
-main_df$freqNewsPubl <- as_factor(main_df$freqNewsPubl)
-main_df$newsPriv <- as_factor(main_df$newsPriv)
-main_df$freqNewsPriv <- as_factor(main_df$freqNewsPriv)
-main_df$freqNewsp <- as_factor(main_df$freqNewsp)
-main_df$intPol <- as_factor(main_df$intPol)
-main_df$freqIntPol <- as_factor(main_df$freqIntPol)
-main_df$trustTv <- as_factor(main_df$trustTv)
-main_df$trustNewsp <- as_factor(main_df$trustNewsp)
-main_df$infMedia <- as_factor(main_df$infMedia)
-main_df$polCompl <- as_factor(main_df$polCompl)
-main_df$knowlPol <- as_factor(main_df$knowlPol)
-main_df$shldInfPol <- as_factor(main_df$shldInfPol)
-main_df$leftRight <- as_factor(main_df$leftRight)
-main_df$class <- as_factor(main_df$class)
-main_df$sex <- as_factor(main_df$sex)
-main_df$agec <- as_factor(main_df$agec)
-main_df$educ <- as_factor(main_df$educ)
-main_df$uniDeg <- as_factor(main_df$uniDeg)
-main_df$typeUniDeg <- as_factor(main_df$typeUniDeg)
-main_df$work <- as_factor(main_df$work)
-main_df$currOcc <- as_factor(main_df$currOcc)
-main_df$subvOther <- as_factor(main_df$subvOther)
-main_df$unempl <- as_factor(main_df$unempl)
-main_df$hhincc <- as_factor(main_df$hhincc)
-main_df$freqPolFam <- as_factor(main_df$freqPolFam)
-main_df$freqPolFre <- as_factor(main_df$freqPolFre)
-main_df$placeLive <- as_factor(main_df$placeLive)
-main_df$vote <- as_factor(main_df$vote)
-main_df$partyVote <- as_factor(main_df$partyVote)
-main_df$intClassH <- as_factor(main_df$intClassH)
-main_df$land <- as_factor(main_df$land)
-main_df$wghtpew <- as_factor(main_df$wghtpew)
+###Eingrenzen des Datensatzes:
+main_df <- main_df[, c(5:6, 8, 11, 13:19, 70:71, 78, 82, 84, 91, 105, 128, 159, 163, 181, 191, 194, 198, 199, 210, 213, 
+                       338, 395, 426:427, 435, 472:473, 685, 701, 705)]
+
 
 #####Speichern:
 save(main_df, file = "main_df.RData")
