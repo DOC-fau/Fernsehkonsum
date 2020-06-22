@@ -343,7 +343,7 @@ main_df_logReg <- main_df_logReg[, c(1:4, 6, 11:14, 16:17)]
 
 
 main_df_logReg$placeLive
-
+# Einzelhaus muss nicht arm sein? Aussagekraft?
 
 
 
