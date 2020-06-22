@@ -117,17 +117,32 @@ corTblLongFormat <- melt(corTbl)
 
 ggplot(corTblLongFormat) +
   geom_tile(aes(x = Var1, y = Var2, fill = value)) +
-  scale_fill_gradient(low = "white", high = "black") +
+  scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
+  theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(title = "Korrelationsplot") +
+  ggsave("corPlot.pdf", path = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+
+# Einige Chunks existieren! german [2], class [16], incc [22], uniDeg [20], intClassH [28], trustNewsp [10], polCompl [12],
+# freqPolFre [25], work [21], freqPolFam [24], finSit [3]
+
+main_df_logReg <- main_df_logReg[, c(1, 4:9, 11, 13:15, 17, 23, 26:27)]
+main_df_logReg_num <- main_df_logReg_num[, c(1, 4:9, 11, 13:15, 17, 23, 26:27)]
+
+
+##Finale Prüfung nach Korrelationen
+(corTbl <- round(cor(main_df_logReg_num), 4))
+main_df_logReg_num <- main_df_logReg_num[, 1:17]
+(corTbl <- round(cor(main_df_logReg_num), 4))
+corTblLongFormat <- melt(corTbl)
+
+ggplot(corTblLongFormat) +
+  geom_tile(aes(x = Var1, y = Var2, fill = value)) +
+  scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(title = "Korrelationsplot") +
   ggsave("corPlot.pdf", path = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 remove(corTblLongFormat, corTbl)
-# Einige Chunks existieren! german [2], class [16], incc [22], uniDeg [20], intClassH [28]
-
-main_df_logReg <- main_df_logReg[, c(1, 3:15, 17:19, 21, 23:27)]
-main_df_logReg_num <- main_df_logReg_num[, c(1, 3:15, 17:19, 21, 23:27)]
-
 
 ###Konfirmative Faktorenanalyse:
 ##Mordellvoraussetzung für die Faktorenanalyse (Barletts Test):
@@ -136,7 +151,7 @@ cortest.bartlett(main_df_logReg_num)
 
 
 ##Null-Modell:
-pca.null <- principal(main_df_logReg_num, nfactors = 23, rotate = "none")
+pca.null <- principal(main_df_logReg_num, nfactors = 15, rotate = "none")
 
 # Das Null-Modell hat zwei Spalten mit h2 und u2. h2, die Kommunalität, ist der Anteil der 
 # Varianz, den jede Variable mit anderen Variablen gemeinsam hat - vorerst sind alle 1. 
@@ -153,11 +168,11 @@ abline(h = 1)
 # liegen im Bereich über dem Eigenwertkriterium. Hier 8.
 
 #Modell mit den nützlichen Faktoren:
-pca.nfactors <- principal(main_df_logReg_num, nfactors = 7, rotate = "none")
+pca.nfactors <- principal(main_df_logReg_num, nfactors = 5, rotate = "none")
 
 
 ##Full-Modell:
-pca.full <- principal(main_df_logReg_num, nfactors = 7, rotate="varimax")
+pca.full <- principal(main_df_logReg_num, nfactors = 5, rotate="varimax")
 
 remove(main_df_logReg_num, pca.null, pca.nfactors)
 
@@ -167,130 +182,176 @@ print.psych(pca.full, cut = 0.3, sort = TRUE)
 
 ###Faktoren in denen die Variablen laden:
 ##F01
-# freqPolFam
-# freqPolFre
-# knowlPol    (F06)
+# knowlPol    (F02)
+# ardZdf
+# vote
 # shldInfPol
-# polCompl    (F06)
-# vote        (F03)
+# freqNewsp   (F02)
 
-# Index: Politische Partizipation; vote außenvor
+# Index: Politische Partizipation, ardZdf ausschließen
 
 
 ##F02
-# agec
-# work        (F03)
-# intPol      (F01)
-# freqNewsp
-# ardZdf
+# intPol      (F03)
+# placeLive
 
 # Kein theoretisch begründbarer Index
 
 
 ##F03
-# finSit
-# hhincc
+# infMedia
+# trustTv
 
-# Kein sinnvoller Index
+# Index: Vertrauen in Medien
 
 
 ##F04
-# trustTv
-# trustNewsp
-# infMedia
-
-# Vertrauen in die Medianlandschaft
-
-
-##F05
-# placeLive
-# educ        (F02, F03)
-
-# Kein sinnvoller Index
-
-
-##F06
-# sex
-# leftRight   (F05)
+# eastWest
+# newsPriv    (F05)
+# tvWeek      (F02)
+# hhincc      (F01)
 
 # Kein theoretisch begründbarer Index
 
 
-##F07
-# eastWest    (F05)
-# newsPriv    (F05)
-# tvWeek      (F02)
+##F05
+# leftRight
+# sex
 
-# Kein sinnvoller Index
+# Kein theoretisch begründbarer Index
 
 
 ###Indize-lose Variablen:
-# vote
-# agec
-# work
-# intPol
-# freqNewsp
 # ardZdf
-# finSit
-# hhincc
+# intPol
 # placeLive
-# educ
-# sex
-# leftRight
 # eastWest
 # newsPriv
-# tvWeek 
+# tvWeek
+# hhincc
+# leftRight
+# sex
 
 
 ####Indizes bilden:
-###Index: Politische Partizipation
-# freqPolFam
-# freqPolFre
+###Index: Politische Partizipation (polPart)
 # knowlPol
+# vote
 # shldInfPol
-# polCompl 
+# freqNewsp 
 
-summary(main_df_logReg$freqPolFam)
-summary(main_df_logReg$freqPolFre)
 summary(main_df_logReg$knowlPol)
+summary(main_df_logReg$vote)
 summary(main_df_logReg$shldInfPol)
-summary(main_df_logReg$polCompl)
+summary(main_df_logReg$freqNewsp)
 
-var01 <- plyr::revalue(main_df_logReg$freqPolFam, c("KEINE ANTWORT" = NA,
-                                                      "KEIN VERTRAUEN" = "1",
-                                                      "GROßES VERTRAUEN" = "7"))
+var01 <- factor(main_df_logReg$knowlPol,levels(main_df_logReg$knowlPol)[c(4, 3, 2, 1)])
+var02 <- factor(main_df_logReg$vote,levels(main_df_logReg$vote)[c(2, 1)])
+var03 <- factor(main_df_logReg$shldInfPol,levels(main_df_logReg$shldInfPol)[c(4, 3, 2, 1)])
 
-var02 <- plyr::revalue(main_df_logReg$freqPolFre, c("KEINE ANTWORT" = NA,
-                                                     "KEIN VERTRAUEN" = "1",
-                                                     "GROßES VERTRAUEN" = "7"))
+var01 <- plyr::revalue(var01, c("STIMME GAR NICHT ZU" = "KEINE ZUSTIMMUNG",
+                                "STIMME EHER NICHT ZU" = "KEINE ZUSTIMMUNG",
+                                "STIMME EHER ZU" = "ZUSTIMMUNG",
+                                "STIMME VOLL ZU" = "ZUSTIMMUNG"))
 
-var03 <- plyr::revalue(main_df_logReg$knowlPol, c("KEINE ANTWORT" = NA,
-                                                   "KEIN VERTRAUEN" = "1",
-                                                   "GROßES VERTRAUEN" = "7"))
+var03 <- plyr::revalue(var03, c("STIMME GAR NICHT ZU" = "KEINE ZUSTIMMUNG",
+                                 "STIMME EHER NICHT ZU" = "KEINE ZUSTIMMUNG",
+                                 "STIMME EHER ZU" = "ZUSTIMMUNG",
+                                 "STIMME VOLL ZU" = "ZUSTIMMUNG"))
 
-var04 <- plyr::revalue(main_df_logReg$shldInfPol, c("KEINE ANTWORT" = NA,
-                                                      "KEIN VERTRAUEN" = "1",
-                                                      "GROßES VERTRAUEN" = "7"))
+var04 <- plyr::revalue(main_df_logReg$freqNewsp, c("NIE" = "NEIN",
+                                                   "SELTENER" = "JA",
+                                                   "AN EINEM TAG" = "JA",
+                                                   "AN 2 TAGEN" = "JA",
+                                                   "AN 3 TAGEN" = "JA",
+                                                   "AN 4 TAGEN" = "JA",
+                                                   "AN 5 TAGEN" = "JA",
+                                                   "AN 6 TAGEN" = "JA",
+                                                   "AN ALLEN 7 TAGEN" = "JA"))
 
-var05 <- plyr::revalue(main_df_logReg$polCompl, c("KEINE ANTWORT" = NA,
-                                                    "KEIN VERTRAUEN" = "1",
-                                                    "GROßES VERTRAUEN" = "7"))
+var01 <- as.numeric(var01)
+var02 <- as.numeric(var02)
+var03 <- as.numeric(var03)
+var04 <- as.numeric(var04)
+
+main_df_logReg$polPart <- (var01 + var02 + var03 + var04)/4 - 1
+remove(var01, var02, var03, var04)
+summary(main_df_logReg$polPart)
+# 0 Keine politische Partizipation - 1 Starke politische Partizipation
 
 
-
-###Vertrauen in die Medianlandschaft
+###Index: Vertrauen in Medien (trustMed)
 # trustTv
-# trustNewsp
 # infMedia
 
-
-
-
-
-
-
+summary(main_df_logReg$trustTv)
+summary(main_df_logReg$infMedia)
 
 #########################
+
+var01 <- plyr::revalue(main_df_logReg$trustTv, c("KEIN VERTRAUEN" = "GERINGES VERTRAUEN",
+                                                 "2" = "GERINGES VERTRAUEN",
+                                                 "3" = "MODERATES VERTRAUEN",
+                                                 "4" = "MODERATES VERTRAUEN",
+                                                 "5" = "MODERATES VERTRAUEN",
+                                                 "6" = "STÄRKERES VERTRAUEN",
+                                                 "GROßES VERTRAUEN" = "STÄRKERES VERTRAUEN"))
+
+var02 <- factor(main_df_logReg$infMedia,levels(main_df_logReg$infMedia)[c(3, 2, 1)])
+
+var01 <- as.numeric(var01)
+var02 <- as.numeric(var02)
+
+main_df_logReg$trustMed <- (var01 + var02)/2 - 1
+remove(var01, var02)
+summary(main_df_logReg$trustMed)
+# 0 Geringes Vertrauen in Medien - 2 Hohes Vertrauen in Medien
+
+
+####Aufbereitung der Variablen für die Analyse:
+###Alleinstehende Variablen:
+# ardZdf 3
+# intPol 6
+# placeLive 14
+# eastWest 1
+# newsPriv 4
+# tvWeek 2
+# hhincc 13
+# leftRight 11
+# sex 12
+
+###Indices:
+# polPart 16
+# trustMed 17
+
+###Datensatz vorbereiten:
+
+summary(main_df_logReg$ardZdf)
+summary(main_df_logReg$intPol)
+summary(main_df_logReg$placeLive)
+summary(main_df_logReg$eastWest)
+summary(main_df_logReg$newsPriv)
+summary(main_df_logReg$tvWeek)
+summary(main_df_logReg$hhincc)
+summary(main_df_logReg$leftRight)
+summary(main_df_logReg$sex)
+
+main_df_logReg <- main_df_logReg[, c(1:4, 6, 11:14, 16:17)]
+
+
+
+
+
+main_df_logReg$placeLive
+
+
+
+
+
+############## Quasi-metrik der Variablen <- as.numeric
+
+
+# main_df_logReg$hhincc <- as.numeric(main_df_logReg$hhincc)
 
 
 ###Regressionsmodell:
@@ -318,13 +379,12 @@ step(model.null,
 
 
 #Final-Modell:
-model.final = glm(ardZdf ~ agec + freqPolFam + knowlPol + class + 
-                  tvWeek + uniDeg + trustTv + freqNewsp + vote + eastwest + 
-                  freqPolFre,
+model.final = glm(ardZdf ~ tvWeek + polPart + trustMed + newsPriv + hhincc + leftRight,
                   data=  main_df_logReg,
                   family = binomial(link = "logit")
 )
 
+remove(model.null, model.full)
 
 #Koeffizienten:
 summary(model.final)

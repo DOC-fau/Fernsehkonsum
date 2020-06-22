@@ -37,7 +37,7 @@ When you click the **Knit** button a document will be generated that includes bo
 
 Why incc und nicht inc (hhincc)
 
-Reduktion der Fallzahl auf ca. 2000
+Reduktion der Fallzahl auf ca. 2400
 alle Vars sind nicht notwendig, bis auf partyVote aber hier würde Nicht-Wähleranteil verloren gehen (leftRight ist auch gut)
 
 
