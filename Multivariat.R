@@ -123,7 +123,7 @@ ggplot(corTblLongFormat) +
   ggsave("corPlot.pdf", path = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 # Einige Chunks existieren! german [2], class [16], incc [22], uniDeg [20], intClassH [28], trustNewsp [10], polCompl [12],
-# freqPolFre [25], work [21], freqPolFam [24], finSit [3]
+# age [18], educ [19], freqPolFre [25], work [21], freqPolFam [24], finSit [3]
 
 main_df_logReg <- main_df_logReg[, c(1, 4:9, 11, 13:15, 17, 23, 26:27)]
 main_df_logReg_num <- main_df_logReg_num[, c(1, 4:9, 11, 13:15, 17, 23, 26:27)]
@@ -325,33 +325,23 @@ summary(main_df_logReg$trustMed)
 # trustMed 17
 
 ###Datensatz vorbereiten:
-
 summary(main_df_logReg$ardZdf)
 summary(main_df_logReg$intPol)
 summary(main_df_logReg$placeLive)
-summary(main_df_logReg$eastWest)
+summary(main_df_logReg$eastwest)
 summary(main_df_logReg$newsPriv)
 summary(main_df_logReg$tvWeek)
 summary(main_df_logReg$hhincc)
 summary(main_df_logReg$leftRight)
 summary(main_df_logReg$sex)
 
-main_df_logReg <- main_df_logReg[, c(1:4, 6, 11:14, 16:17)]
+# placeLive nicht sinnig als quasi-metrisch einzuschätzen
+main_df_logReg <- main_df_logReg[, c(1:4, 6, 11:13, 16:17)]
 
-
-
-
-
-main_df_logReg$placeLive
-# Einzelhaus muss nicht arm sein? Aussagekraft?
-
-
-
-
-############## Quasi-metrik der Variablen <- as.numeric
-
-
-# main_df_logReg$hhincc <- as.numeric(main_df_logReg$hhincc)
+# Numerisches Niveau, da eine quasi-metrik bei folgenden Variablen angenommen wird
+main_df_logReg$tvWeek <- as.numeric(main_df_logReg$tvWeek)
+main_df_logReg$hhincc <- as.numeric(main_df_logReg$hhincc)
+main_df_logReg$leftRight <- as.numeric(main_df_logReg$leftRight)
 
 
 ###Regressionsmodell:
@@ -379,7 +369,7 @@ step(model.null,
 
 
 #Final-Modell:
-model.final = glm(ardZdf ~ tvWeek + polPart + trustMed + newsPriv + hhincc + leftRight,
+model.final = glm(ardZdf ~ tvWeek + hhincc + trustMed + polPart + leftRight + newsPriv + eastwest,
                   data=  main_df_logReg,
                   family = binomial(link = "logit")
 )
