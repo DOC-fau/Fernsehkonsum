@@ -17,11 +17,11 @@ library(rcompanion)
 library(DMwR)
 library(haven)
 library(expss)
-library(here)
 
 
 #####Multivariate Analyse:
-load("main_df.RData")
+setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/")
+load("./Seminararbeit/Fernsehkonsum/main_df.RData")
 main_df_logReg <- main_df
 
 
@@ -76,7 +76,10 @@ main_df_logReg <- main_df
 # Ausschluss von typeUniDeg [24], currOcc [8], subvOther [26], unempl [27], freqNewsPriv [28], freqIntPol [11], 
 # partyVote [35] freqNewsPubl [6]
 
+pdf(file="./Seminararbeit/Bericht/Graphiken/missmap.pdf")
 main_df_logReg %>% missmap(main = "Missing values vs observed")
+dev.off()
+
 main_df_logReg <- main_df_logReg[, c(1:5, 7, 9:10, 12:23, 25, 29:34, 36:38)]
 main_df_logReg <- na.omit(main_df_logReg)
 main_df_logReg %>% missmap(main = "Missing values vs observed")
@@ -119,8 +122,8 @@ ggplot(corTblLongFormat) +
   geom_tile(aes(x = Var1, y = Var2, fill = value)) +
   scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(title = "Korrelationsplot") +
-  ggsave("corPlot.pdf", path = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(title = "Korrelationsplot vor Datenreduktion") +
+  ggsave("corPlot01.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 # Einige Chunks existieren! german [2], class [16], incc [22], uniDeg [20], intClassH [28], trustNewsp [10], polCompl [12],
 # age [18], educ [19], freqPolFre [25], work [21], freqPolFam [24], finSit [3]
@@ -139,8 +142,8 @@ ggplot(corTblLongFormat) +
   geom_tile(aes(x = Var1, y = Var2, fill = value)) +
   scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(title = "Korrelationsplot") +
-  ggsave("corPlot.pdf", path = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(title = "Korrelationsplot nach Datenreduktion") +
+  ggsave("corPlot02.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 remove(corTblLongFormat, corTbl)
 

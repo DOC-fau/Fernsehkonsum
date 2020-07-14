@@ -16,7 +16,6 @@ install.packages("rcompanion")
 install.packages("janitor")
 install.packages("DMwR")
 install.packages("expss")
-install.packages("here")
 
 library(foreign)
 library(tidyverse)
@@ -34,12 +33,13 @@ library(pscl)
 library(rcompanion)
 library(DMwR)
 library(expss)
-library(here)
 
 
 #########Vorbereitung des Datensatzes
-main_df <- read.spss(file = "H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/Seminararbeit/Datensatz/allbus-daten_2018.sav", to.data.frame=TRUE)
+setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/")
+main_df <- read.spss(file = "./Seminararbeit/Datensatz/allbus-daten_2018.sav", to.data.frame=TRUE)
 main_df <- as_tibble(main_df)
+
 
 #####Variablenliste:
 # lm19 TV: WATCH NEWS ON PUBLIC CHANNELS?
@@ -127,6 +127,6 @@ main_df <- main_df[, c(5:6, 8, 11, 13:19, 70:71, 78, 82, 84, 91, 105, 128, 159, 
 
 
 #####Speichern:
-save(main_df, file = "main_df.RData")
+save(main_df, file = "./Seminararbeit/Fernsehkonsum/main_df.RData")
 
 #####Ende
