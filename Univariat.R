@@ -24,6 +24,9 @@ setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrun
 load("./Seminararbeit/Fernsehkonsum/main_df.RData")
 main_df_desc <- main_df
 
+dir.create("./Seminararbeit/Bericht/Graphiken")
+unlink("./Seminararbeit/Bericht/Graphiken/*.uni.pdf")
+
 
 #####Variablenliste:
 # ardZdf: TV: WATCH NEWS ON PUBLIC CHANNELS?
@@ -92,8 +95,8 @@ main_df_desc$ardZdf %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(ardZdf)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
-  labs(y = "Anzahl", x = "Öffentliches TV schauen", title = "Öffentliches TV") +
-  ggsave("freqArdZdf.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Öffentliches TV schauen", title = "TV") +
+  ggsave("freqArdZdf.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###REGION OF INTERVIEW: WEST - EAST
@@ -120,7 +123,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(eastwest)) + 
   scale_x_discrete(limits = c("ALTE BUNDESLAENDER", "NEUE BUNDESLAENDER")) + 
   labs(y = "Anzahl", x = "Osten oder Westen", title = "Wohngebiet") +
-  ggsave("freqEastWest.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqEastWest.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###GERMAN CITIZENSHIP?
@@ -147,7 +150,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(german)) + 
   scale_x_discrete(limits = c("JA", "JA,NEBEN ZWEITER", "NEIN", NA)) + 
   labs(y = "Anzahl", x = "Deutsche Staatsangehörigkeit", title = "Staatsangehörigkeit") +
-  ggsave("freqGerman.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqGerman.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP. OWN CURRENT FINANCIAL SITUATION
@@ -174,7 +177,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(finSit)) + 
   scale_x_discrete(limits = c("SEHR GUT", "GUT", "TEILS TEILS", "SCHLECHT", "SEHR SCHLECHT", NA)) + 
   labs(y = "Anzahl", x = "Einschätzung der finanziellen Situation", title = "Finanz. Situation") +
-  ggsave("freqFinSit.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqFinSit.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###WATCH TV: HOW MANY DAYS A WEEK
@@ -201,8 +204,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(tvWeek)) + 
   scale_x_discrete(limits = c("NIE", "SELTENER", "AN EINEM TAG", "AN 2 TAGEN", "AN 3 TAGEN", "AN 4 TAGEN", "AN 5 TAGEN", "AN 6 TAGEN", "AN ALLEN 7 TAGEN", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Anzahl an Tagen an denen TV geschaut wird", title = "TV pro Woche") +
-  ggsave("freqFinSit.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Anzahl an Tagen an denen TV geschaut wird", title = "TV") +
+  ggsave("freqTvWeek.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###TV: HOW OFTEN NEWS ON PUBLIC CHANNELS?
@@ -229,8 +232,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(freqNewsPubl)) + 
   scale_x_discrete(limits = c("NIE", "SELTENER", "AN EINEM TAG", "AN 2 TAGEN", "AN 3 TAGEN", "AN 4 TAGEN", "AN 5 TAGEN", "AN 6 TAGEN", "AN ALLEN 7 TAGEN", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Anzahl an Tagen an denen TV geschaut wird", title = "TV pro Woche") +
-  ggsave("freqFreqNewsPubl.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Anzahl an Tagen an denen Nachrichten auf öffentlich-rechtlichen Sendern geschaut wird", title = "TV") +
+  ggsave("freqFreqNewsPubl.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###TV: WATCH NEWS ON PRIVATE CHANNELS?
@@ -256,8 +259,8 @@ main_df_desc$newsPriv %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(newsPriv)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
-  labs(y = "Anzahl", x = "Nachrichten schauen auf Privatkanälen", title = "Nachrichten") +
-  ggsave("freqNewsPriv.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Nachrichten schauen auf Privatkanälen", title = "TV") +
+  ggsave("freqNewsPriv.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 ###TV: HOW OFTEN NEWS ON PRIVATE CHANNELS?
 str(main_df_desc$freqNewsPriv)
@@ -283,7 +286,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(freqNewsPriv)) + 
   scale_x_discrete(limits = c("NIE", "SELTENER", "AN EINEM TAG", "AN 2 TAGEN", "AN 3 TAGEN", "AN 4 TAGEN", "AN 5 TAGEN", "AN 6 TAGEN", "AN ALLEN 7 TAGEN", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Anzahl an Tagen an denen TV geschaut wird", title = "TV pro Woche") +  ggsave("freqFreqNewsPriv.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Anzahl an Tagen an denen TV geschaut wird", title = "TV") +  
+  ggsave("freqFreqNewsPriv.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###NEWSPAPER: HOW MANY DAYS A WEEK
@@ -310,7 +314,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(freqNewsp)) + 
   scale_x_discrete(limits = c("NIE", "SELTENER", "AN EINEM TAG", "AN 2 TAGEN", "AN 3 TAGEN", "AN 4 TAGEN", "AN 5 TAGEN", "AN 6 TAGEN", "AN ALLEN 7 TAGEN", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  ggsave("freqFreqNewsp.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Anzahl an Tagen an denen Zeitung gelesen wird", title = "Zeitung") +
+  ggsave("freqFreqNewsp.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###INTERNET: FOR INFORMATION ON POLITICS
@@ -337,7 +342,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(intPol)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
   labs(y = "Anzahl", x = "Internetnutzung für Informationen zu Politik", title = "Internetnutzung") +
-  ggsave("freqIntPol.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqIntPol.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###HOW OFTEN INTERNET FOR INFO ON POLITICS?
@@ -363,8 +368,8 @@ main_df_desc$freqIntPol %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(freqIntPol)) + 
   scale_x_discrete(limits = c("TAEGLICH", "EINMAL JEDE WOCHE", "EINMAL JEDEN MONAT", "SELTENER", "NIE", NA)) + 
-  labs(y = "Anzahl", x = "Häufigkeit der Internetnutzung für Informationen zu Politik", title = "Häufigkeit der Internetnutzung") +
-  ggsave("freqFreqIntPol.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Häufigkeit der Internetnutzung für Informationen zu Politik", title = "Internetnutzung") +
+  ggsave("freqFreqIntPol.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###TRUST: TELEVISION
@@ -391,7 +396,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(trustTv)) + 
   scale_x_discrete(limits = c("KEIN VERTRAUEN", "2", "3", "4", "5", "6", "GROßES VERTRAUEN", NA)) +
   labs(y = "Anzahl", x = "Vertrauen in TV", title = "Vertrauen") +
-  ggsave("freqTrustTv.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqTrustTv.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###TRUST: NEWSPAPERS
@@ -418,7 +423,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(trustNewsp)) + 
   scale_x_discrete(limits = c("KEIN VERTRAUEN", "2", "3", "4", "5", "6", "GROßES VERTRAUEN", NA)) +
   labs(y = "Anzahl", x = "Vertrauen in Zeitungen", title = "Vertrauen") +
-  ggsave("freqTrustNewsp.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqTrustNewsp.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###MEDIA: INFLUENCE ON PUBLIC OPINION
@@ -444,8 +449,8 @@ main_df_desc$infMedia %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(infMedia)) + 
   scale_x_discrete(limits = c("ZU GERINGER EINFLUSS", "GERADE RICHTIG", "ZU GROSSER EINFLUSS", NA)) + 
-  labs(y = "Anzahl", x = "Einfluss der Medien auf die öffentliche Meinung", title = "Einfluss der Medien") +
-  ggsave("freqInfMedia.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Einfluss der Medien auf die öffentliche Meinung", title = "Zustimmung") +
+  ggsave("freqInfMedia.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###POLITICS IS TOO COMPLICATED FOR ME
@@ -472,7 +477,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(polCompl)) + 
   scale_x_discrete(limits = c("STIMME VOLL ZU", "STIMME EHER ZU", "STIMME EHER NICHT ZU", "STIMME GAR NICHT ZU", NA)) + 
   labs(y = "Anzahl", x = "'Politik ist zu kompliziert'", title = "Zustimmung") +
-  ggsave("freqPolCompl.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqPolCompl.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###I DO NOT KNOW MUCH ABOUT POLITICS
@@ -499,7 +504,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(knowlPol)) + 
   scale_x_discrete(limits = c("STIMME VOLL ZU", "STIMME EHER ZU", "STIMME EHER NICHT ZU", "STIMME GAR NICHT ZU", NA)) + 
   labs(y = "Anzahl", x = "Wenig über Politik wissen", title = "Zustimmung") +
-  ggsave("freqKnowlPol.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqKnowlPol.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###PEOPLE SHLD STAY INFORMED ABOUT POLITICS
@@ -526,7 +531,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(shldInfPol)) + 
   scale_x_discrete(limits = c("STIMME VOLL ZU", "STIMME EHER ZU", "STIMME EHER NICHT ZU", "STIMME GAR NICHT ZU", NA)) + 
   labs(y = "Anzahl", x = "Informiert sein über Politik", title = "Zustimmung") +
-  ggsave("freqShldInfPol.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqShldInfPol.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###SELF-PLACEMENT ON LEFT-RIGHT CONTINUUM
@@ -552,8 +557,8 @@ main_df_desc$leftRight %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(leftRight)) + 
   scale_x_discrete(limits = c("F - LINKS", "A", "M", "O", "G", "Z", "E", "Y", "I", "P - RECHTS", NA)) +
-  labs(y = "Anzahl", x = "Rechts-links Selbsteinschätzung", title = "Einschätzung") +
-  ggsave("freqLeftRight.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Rechts-links Selbsteinschätzung", title = "Selbsteinschätzung") +
+  ggsave("freqLeftRight.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###SELF-ASSESSMENT OF SOCIAL CLASS, RESP
@@ -580,7 +585,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(class)) + 
   scale_x_discrete(limits = c("UNTERSCHICHT", "ARBEITERSCHICHT", "MITTELSCHICHT", "OBERE MITTELSCHICHT", "OBERSCHICHT", NA)) + 
   labs(y = "Anzahl", x = "Schicht Selbsteinschätzung", title = "Selbsteinschätzung") +
-  ggsave("freqClass.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqClass.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESPONDENT: SEX
@@ -607,7 +612,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(sex)) + 
   scale_x_discrete(limits = c("MANN", "FRAU")) + 
   labs(y = "Anzahl", x = "Geschlecht der Befragten", title = "Geschlecht") +
-  ggsave("freqSex.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqSex.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESPONDENT: AGE, CATEGORIZED
@@ -634,7 +639,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(agec)) + 
   scale_x_discrete(limits = c("18-29 JAHRE", "30-44 JAHRE", "45-59 JAHRE", "60-74 JAHRE", "75-89 JAHRE", "UEBER 89 JAHRE", NA)) + 
   labs(y = "Anzahl", x = "Alter der Befragten", title = "Alter") +
-  ggsave("freqAgec.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqAgec.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: GENERAL SCHOOL LEAVING CERTIFICATE
@@ -661,8 +666,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(educ)) + 
   scale_x_discrete(limits = c("OHNE ABSCHLUSS", "VOLKS-,HAUPTSCHULE", "MITTLERE REIFE", "FACHHOCHSCHULREIFE", "HOCHSCHULREIFE", "ANDERER ABSCHLUSS", "NOCH SCHUELER", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Schulabschluss der Befragten", title = "Schulabschluss") +
-  ggsave("freqEduc.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Schulabschluss der Befragten", title = "Abschluss") +
+  ggsave("freqEduc.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: UNIVERSITY DEGREE
@@ -688,8 +693,8 @@ main_df_desc$uniDeg %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(uniDeg)) + 
   scale_x_discrete(limits = c("NICHT GENANNT", "GENANNT", NA)) + 
-  labs(y = "Anzahl", x = "Angabe zu Uniabschluss", title = "Universitätsabschluss") +
-  ggsave("freqUniDeg.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Angabe zu Uniabschluss", title = "Abschluss") +
+  ggsave("freqUniDeg.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: TYPE OF UNIVERSITY DEGREE
@@ -715,8 +720,8 @@ main_df_desc$typeUniDeg %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(typeUniDeg)) + 
   scale_x_discrete(limits = c("BACHELOR", "MASTER", "DIPLOM", "MAGISTER", "STAATSEXAMEN", "PROMOTION", "SONSTIGES", NA)) + 
-  labs(y = "Anzahl", x = "Art des Uniabschluss", title = "Universitätsabschluss") +
-  ggsave("freqTypeUniDeg.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Art des Uniabschluss", title = "Abschluss") +
+  ggsave("freqTypeUniDeg.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESPONDENT: CURRENT EMPLOYMENT STATUS
@@ -743,7 +748,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(work)) + 
   scale_x_discrete(limits = c("HAUPTBERUFL.GANZTAGS", "HAUPTBERUFL.HALBTAGS", "NEBENHER BERUFSTAE.", "NICHT ERWERBSTAETIG")) + 
   labs(y = "Anzahl", x = "Art der Erwerbstätigkeit", title = "Erwerbstätigkeit") +
-  ggsave("freqWork.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqWork.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESPONDENT: CURRENT OCCUPATION
@@ -770,8 +775,8 @@ ggplot(main_df_desc) +
   geom_bar(aes(currOcc)) + 
   scale_x_discrete(limits = c("LANDWIRT", "AKADEM.FREIER BERUF", "SONST.SELBSTAENDIGE", "BEAMT,RICHTER,SOLDAT", "ANGESTELLTER", "ARBEITER", "IN AUSBILDUNG", "MITHELF.FAMILIENANG.", NA)) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Derzeitige Beschäftigung", title = "Beschäftigung") +
-  ggsave("freqCurrOcc.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Derzeitige Erwerbstätigkeit", title = "Erwerbstätigkeit") +
+  ggsave("freqCurrOcc.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: SUPERVISING THE WORK OF OTHERS?
@@ -797,8 +802,8 @@ main_df_desc$subvOther %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(subvOther)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
-  labs(y = "Anzahl", x = "Beaufsichtigung von Angestellten", title = "Beaufsichtigung") +
-  ggsave("freqSubvOther.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Beaufsichtigung von Angestellten", title = "Erwerbstätigkeit") +
+  ggsave("freqSubvOther.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: UNEMPLOYMENT IN THE LAST 10 YEARS
@@ -825,7 +830,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(unempl)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
   labs(y = "Anzahl", x = "Arbeitslosigkeit in den letzten 10 Jahren", title = "Arbeitslosigkeit") +
-  ggsave("freqUnempl.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqUnempl.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###RESP.: MONTHLY NET INC.-OPEN+CLOSED, CAT.
@@ -852,7 +857,7 @@ ggplot(main_df_desc) +
   geom_histogram(aes(incc), stat = "count") + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(y = "Anzahl", x = "Monatliches Nettoeinkommen des Befragten", title = "Einkommen") +
-  ggsave("freqIncc.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqIncc.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###HH.: MONTHLY NET INC.-OPEN+CLOSED, CAT.
@@ -878,8 +883,8 @@ main_df_desc$hhincc %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_histogram(aes(hhincc), stat = "count") + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(y = "Anzahl", x = "Monatliches Nettoeinkommen pro Haushalt", title = "Haushaltseinkommen") +
-  ggsave("freqHhincc.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Monatliches Nettoeinkommen pro Haushalt", title = "Einkommen") +
+  ggsave("freqHhincc.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###HOW OFTEN TALK ABOUT POLITICS: IN FAMILY
@@ -906,7 +911,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(freqPolFam)) + 
   scale_x_discrete(limits = c("SEHR OFT", "OFT", "MANCHMAL", "SELTEN", "NIE", NA)) + 
   labs(y = "Anzahl", x = "Austausch über Politik in der Familie", title = "Austausch über Politik") +
-  ggsave("freqFreqPolFam.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqFreqPolFam.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###HOW OFTEN TALK ABOUT POLITICS: FRIENDS
@@ -933,7 +938,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(freqPolFre)) + 
   scale_x_discrete(limits = c("SEHR OFT", "OFT", "MANCHMAL", "SELTEN", "NIE", NA)) + 
   labs(y = "Anzahl", x = "Austausch über Politik im Freundeskreis", title = "Austausch über Politik") +
-  ggsave("freqFreqPolFre.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqFreqPolFre.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###SELF-ASSESSMENT OF PLACE WHERE R LIVES
@@ -960,7 +965,7 @@ ggplot(main_df_desc) +
   geom_bar(aes(placeLive)) + 
   scale_x_discrete(limits = c("GROSSSTADT", "VORORT GROSSSTADT", "MITTEL-, KLEINSTADT", "LAENDL. DORF", "EINZELHAUS, LAND")) + 
     labs(y = "Anzahl", x = "Wohnumgebung des Befragten", title = "Wohnumgebung") +
-  ggsave("freqPlaceLive.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqPlaceLive.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###DID YOU VOTE IN LAST FEDERAL ELECTION?
@@ -986,8 +991,8 @@ main_df_desc$vote %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(vote)) + 
   scale_x_discrete(limits = c("JA", "NEIN", NA)) + 
-  labs(y = "Anzahl", x = "Wahlbeteiligung bei der letzten Bundestagswahl", title = "Wahlbeteiligung") +
-  ggsave("freqVote.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Wahlbeteiligung bei der letzten Bundestagswahl", title = "Bundestagswahl") +
+  ggsave("freqVote.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###PARTY VOTE IN LAST FEDERAL ELECTION
@@ -1013,8 +1018,8 @@ main_df_desc$partyVote %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(partyVote)) + 
   scale_x_discrete(limits = c("CDU-CSU", "SPD", "FDP", "DIE GRUENEN", "DIE LINKE", "AFD", "ANDERE PARTEI", NA)) + 
-  labs(y = "Anzahl", x = "Wahlentscheidung bei der letzten Bundestagswahl", title = "Wahlentscheidung") +
-  ggsave("freqPartyVote.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Wahlentscheidung bei der letzten Bundestagswahl", title = "Bundestagswahl") +
+  ggsave("freqPartyVote.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###INT.: SOCIAL CLASS OF HOUSEHOLD
@@ -1040,8 +1045,8 @@ main_df_desc$intClassH %>% as.numeric() %>% sd(na.rm = TRUE)
 ggplot(main_df_desc) + 
   geom_bar(aes(intClassH)) + 
   scale_x_discrete(limits = c("UNTERSCHICHT", "ARBEITERSCHICHT", "MITTELSCHICHT", "OBERE MITTELSCHICHT", "OBERSCHICHT", "NICHT ERKENNBAR")) + 
-  labs(y = "Anzahl", x = "Schichteinstufung des Haushalts durch den Interviewer", title = "Schichteinstufung des Haushalts") +
-  ggsave("freqIntClassH.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  labs(y = "Anzahl", x = "Schichteinstufung des Haushalts durch den Interviewer", title = "Schichteinstufung") +
+  ggsave("freqIntClassH.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###FEDERAL STATE THAT RESPONDENT LIVES IN
@@ -1069,7 +1074,7 @@ ggplot(main_df_desc) +
   scale_x_discrete(limits = c("SCHLESWIG-HOLSTEIN", "HAMBURG", "NIEDERSACHSEN", "BREMEN", "NORDRHEIN-WESTFALEN", "HESSEN", "RHEINLAND-PFALZ", "BADEN-WUERTTEMBERG", "BAYERN", "SAARLAND", "EHEM. BERLIN-WEST", "EHEM. BERLIN-OST", "BRANDENBURG", "MECKLENB.-VORPOMMERN", "SACHSEN", "SACHSEN-ANHALT", "THUERINGEN"), labels = c("SCHLESWIG-\nHOLSTEIN", "HAMBURG", "NIEDERSACHSEN", "BREMEN", "NORDRHEIN-\nWESTFALEN", "HESSEN", "RHEINLAND-\nPFALZ", "BADEN-\nWUERTTEMBERG", "BAYERN", "SAARLAND", "EHEM. \nBERLIN-WEST", "EHEM. \nBERLIN-OST", "BRANDENBURG", "MECKLENBURG-\nVORPOMMERN", "SACHSEN", "SACHSEN-\nANHALT", "THUERINGEN")) + 
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(y = "Anzahl", x = "Bundesland des Befragten", title = "Bundesland") +
-  ggsave("freqLand.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+  ggsave("freqLand.uni.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 #####Ende

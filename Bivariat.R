@@ -20,7 +20,8 @@ library(expss)
 
 
 #####Multivariate Analyse:
-load("main_df.RData")
+setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/")
+load("./Seminararbeit/Fernsehkonsum/main_df.RData")
 main_df_desc2 <- main_df
 
 
