@@ -20,12 +20,12 @@ library(expss)
 
 
 #####Multivariate Analyse:
-setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/")
-load("./Seminararbeit/Fernsehkonsum/main_df.RData")
+# setwd("H:/01 Studium/01 Bachelor of Arts/03 Schluesselqualifikationen/Einfuehrung in R/")
+# load("./Seminararbeit/Fernsehkonsum/main_df.RData")
 main_df_logReg <- main_df
 
-dir.create("./Seminararbeit/Bericht/Graphiken")
-unlink("./Seminararbeit/Bericht/Graphiken/*.multi.pdf")
+# dir.create("./Seminararbeit/Bericht/Graphiken")
+# unlink("./Seminararbeit/Bericht/Graphiken/*.multi.pdf")
 
 
 ###Variablenliste
@@ -79,9 +79,9 @@ unlink("./Seminararbeit/Bericht/Graphiken/*.multi.pdf")
 # Ausschluss von typeUniDeg [24], currOcc [8], subvOther [26], unempl [27], freqNewsPriv [28], freqIntPol [11], 
 # partyVote [35] freqNewsPubl [6]
 
-pdf(file="./Seminararbeit/Bericht/Graphiken/missmap.multi.pdf")
+# pdf(file="./Seminararbeit/Bericht/Graphiken/missmap.multi.pdf")
 main_df_logReg %>% missmap(main = "Missing values vs observed")
-dev.off()
+# dev.off()
 
 main_df_logReg <- main_df_logReg[, c(1:5, 7, 9:10, 12:23, 25, 29:34, 36:38)]
 main_df_logReg <- na.omit(main_df_logReg)
@@ -126,7 +126,7 @@ ggplot(corTblLongFormat) +
   scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(title = "Korrelationsplot vor Datenreduktion") +
-  ggsave("corPlot01.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+#  ggsave("corPlot01.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 # Einige Chunks existieren! german [2], class [16], incc [22], uniDeg [20], intClassH [28], trustNewsp [10], polCompl [12],
 # age [18], educ [19], freqPolFre [25], work [21], freqPolFam [24], finSit [3]
@@ -146,7 +146,7 @@ ggplot(corTblLongFormat) +
   scale_fill_gradient(low = "white", high = "black", limits = c(-1, 1)) +
   theme(text = element_text(size = 10), axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
   labs(title = "Korrelationsplot nach Datenreduktion") +
-  ggsave("corPlot02.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+#  ggsave("corPlot02.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 remove(corTblLongFormat, corTbl)
 
@@ -166,11 +166,11 @@ pca.null <- principal(main_df_logReg_num, nfactors = 15, rotate = "none")
 
 
 ##Kaiser-Kriterium:
-pdf(file="./Seminararbeit/Bericht/Graphiken/factor.multi.pdf")
+# pdf(file="./Seminararbeit/Bericht/Graphiken/factor.multi.pdf")
 plot(pca.null$values, type = "b", xaxt = 'n', pch = 4)
 axis(2, at = 1)
 abline(h = 1)
-dev.off()
+# dev.off()
 
 
 # Das Eigenwertkriterium bei x = 1 trennt nützliche von untützen Faktoren. NÜtzliche Faktoren
@@ -302,7 +302,7 @@ ggplot(main_df_logReg) +
   geom_histogram(aes(polPart), stat = "count") + 
   scale_x_continuous(breaks = seq(0, 1, by = 0.25)) +
   labs(y = "Anzahl", x = "Politische Partizipation der Befragten", title = "Additiver Index") +
-  ggsave("freqPolPart.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+#  ggsave("freqPolPart.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ###Index: Vertrauen in Medien (trustMed)
@@ -346,7 +346,7 @@ ggplot(main_df_logReg) +
   geom_histogram(aes(trustMed), stat = "count") + 
   scale_x_continuous(breaks = seq(0, 2, by = 0.50)) +
   labs(y = "Anzahl", x = "Vertrauen der Befragten in die Medien", title = "Additiver Index") +
-  ggsave("freqPTrustMed.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
+#  ggsave("freqPTrustMed.multi.pdf", path = "./Seminararbeit/Bericht/Graphiken", width = 10, height = 10)
 
 
 ####Aufbereitung der Variablen für die Analyse:
